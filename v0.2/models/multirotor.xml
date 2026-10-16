@@ -1,0 +1,27 @@
+<mujoco model="CRUCIBLE six DOF quadrotor demonstrator">
+  <compiler angle="radian"/>
+  <option timestep="0.005" gravity="0 0 -9.81" integrator="implicitfast" iterations="60" tolerance="1e-10"/>
+  <default><geom solref="0.01 1" solimp="0.95 0.99 0.001"/></default>
+  <worldbody>
+    <light pos="0 -3 6"/>
+    <geom name="ground" type="plane" size="30 30 0.1" rgba="0.16 0.20 0.25 1"/>
+    <body name="airframe" pos="0 0 2">
+      <freejoint name="base"/>
+      <inertial pos="0 0 0" mass="1.5" diaginertia="0.03 0.03 0.05"/>
+      <geom name="hull" type="box" size="0.10 0.08 0.045" rgba="0.10 0.60 0.68 1"/>
+      <geom name="arm1" type="capsule" fromto="-0.18 -0.18 0 0.18 0.18 0" size="0.015"/>
+      <geom name="arm2" type="capsule" fromto="-0.18 0.18 0 0.18 -0.18 0" size="0.015"/>
+      <site name="imu"/>
+      <site name="r0" pos="0.18 0.18 0" size="0.06" rgba="0.9 0.5 0.1 1"/>
+      <site name="r1" pos="-0.18 0.18 0" size="0.06"/>
+      <site name="r2" pos="-0.18 -0.18 0" size="0.06"/>
+      <site name="r3" pos="0.18 -0.18 0" size="0.06"/>
+    </body>
+  </worldbody>
+  <actuator>
+    <general name="motor0" site="r0" gear="0 0 1 0 0 0.018" dyntype="filterexact" dynprm="0.065" ctrllimited="true" ctrlrange="0 7.5" forcelimited="true" forcerange="0 7.5"/>
+    <general name="motor1" site="r1" gear="0 0 1 0 0 -0.018" dyntype="filterexact" dynprm="0.065" ctrllimited="true" ctrlrange="0 7.5" forcelimited="true" forcerange="0 7.5"/>
+    <general name="motor2" site="r2" gear="0 0 1 0 0 0.018" dyntype="filterexact" dynprm="0.065" ctrllimited="true" ctrlrange="0 7.5" forcelimited="true" forcerange="0 7.5"/>
+    <general name="motor3" site="r3" gear="0 0 1 0 0 -0.018" dyntype="filterexact" dynprm="0.065" ctrllimited="true" ctrlrange="0 7.5" forcelimited="true" forcerange="0 7.5"/>
+  </actuator>
+</mujoco>

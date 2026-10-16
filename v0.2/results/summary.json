@@ -1,0 +1,1912 @@
+{
+  "freeze": {
+    "contract_hash": "e3e52ee0626066ef4082730d22b823fbe9079e0ec82a16af182d8ce3354eb11d",
+    "created_utc": "2026-10-16T07:14:03Z",
+    "development_disclosure": "Nominal, long-dropout and severe combined scenarios were inspected while developing models/controllers. These are development examples. Held-out seeds were not inspected/tuned. This is an internal pre-campaign freeze, not third-party preregistration.",
+    "environment": {
+      "machine": "x86_64",
+      "mujoco": "3.16.0",
+      "numpy": "2.5.4",
+      "python": "3.12.14",
+      "system": "Linux"
+    },
+    "schema": "crucible-freeze/2",
+    "source_hash": "d223db1b8ef4bc09cc9ed448e344c1496d16336ad966bfdbe94de747f5264fe1",
+    "source_manifest": {
+      "contracts/mission.json": "dc38632dea6c7646397b6a530b65e3ff2f0f7689551c55da1f0d81de8a64e048",
+      "crucible/__init__.py": "856a56f16870e01f06d40f18c2f5af6c8ec26338135cccc322f1d6732348dcd0",
+      "crucible/__main__.py": "8e82385e5e60d30d634e768959e85e0e9eb468a7516c5c9ac3f1fa662b99942b",
+      "crucible/campaign.py": "54989ef01fc9e555631f84a38cec1e2bf2cf11cc2b72af3747bf7edbce74d5cb",
+      "crucible/evidence.py": "6c8c9d43eccf6387b912f467522bf9eb12b7cbc5c12aafcab9f7406ea5e0c91b",
+      "crucible/monitor.py": "aec647215c48ea73b3aebc8ea762efd54dcc3c6dba8c840561d6ce8bc1e7ea36",
+      "crucible/runtime.py": "201bb3611088e831194125df4b46cba1b0d0c86f1d99acdbc7ef6c9152e49d05",
+      "models/multirotor.xml": "cc4d70f5baa78970a8796b1a409d535c80724b9aebad7472658be2333ffb945c",
+      "models/rover.xml": "bf79d025998e1d04d7a4fae46ce596e9aa324a07f52c8c51ee388b70e288102d",
+      "requirements.txt": "129b23477f90128249009785672281fa9b0e2a6a48ba333801be84f39b02af72",
+      "tests/test_campaign.py": "50de4fb602f314224172174d24b05dc67d350beaf58fa9bdd60339355c34f00d",
+      "tests/test_evidence.py": "e726876bbf55647863c47607ca028903c544baa3b9f773bba7852b9f5da58cfb",
+      "tests/test_monitor.py": "dcf98991e9032da36261fd42caf5bae6ab95913fb6c280632108ac1ca372d274",
+      "tests/test_physics.py": "c4607f2a68ea6131a9aeb77d7f6ab9e336a767c080e417ead69d9cc3e0ca36e4"
+    }
+  },
+  "heldout_oracle_agreement_all": true,
+  "models": {
+    "multirotor": {
+      "guarded_on_reduced": {
+        "contract_hash": "e3e52ee0626066ef4082730d22b823fbe9079e0ec82a16af182d8ce3354eb11d",
+        "controller": "guarded_failsafe",
+        "environment": {
+          "machine": "x86_64",
+          "mujoco": "3.16.0",
+          "numpy": "2.5.4",
+          "python": "3.12.14",
+          "system": "Linux"
+        },
+        "metrics": {
+          "contact_samples": 0,
+          "max_actuator_force": 4.512199633358352,
+          "max_est_error_m": 0.06079795719786216,
+          "max_speed_mps": 1.6,
+          "saturated_fraction": 0.0
+        },
+        "oracle_agreement": true,
+        "physics_dt": 0.005,
+        "scenario": {
+          "actuator_end": 6.0,
+          "actuator_index": 2,
+          "actuator_start": 1.8,
+          "authority": 1.0,
+          "event_s": 2.0,
+          "friction": 0.9,
+          "imu_bias": 0.0,
+          "initial_yaw": 0.0,
+          "lag_scale": 1.0,
+          "latency": 0.04,
+          "model": "multirotor",
+          "name": "search-shifted_halton-11",
+          "nav_bias": 2.4733612031582295,
+          "nav_duration": 0.0,
+          "nav_kind": "stale",
+          "nav_start": 1.8,
+          "seed": 4101,
+          "wind": 1.5766417365761352,
+          "wind_end": 6.0,
+          "wind_start": 2.0,
+          "wind_y": 4.165602530011856
+        },
+        "schema": "crucible-evidence/2",
+        "source_hash": "d223db1b8ef4bc09cc9ed448e344c1496d16336ad966bfdbe94de747f5264fe1",
+        "trace_hash": "9ebed11f0e61685a0f0a688b408abe4e8c34c68d149f0b9d1c99506d3e404a11",
+        "verdict": {
+          "invariants": [
+            {
+              "first_breach_s": null,
+              "observed_margin": 0.6945647508259292,
+              "rule": {
+                "bound": 0.6,
+                "op": "ge",
+                "scale": 2.0,
+                "signal": "z",
+                "unit": "m"
+              },
+              "status": "SAT"
+            },
+            {
+              "first_breach_s": null,
+              "observed_margin": 0.6947494119565771,
+              "rule": {
+                "bound": 3.4,
+                "op": "le",
+                "scale": 2.0,
+                "signal": "z",
+                "unit": "m"
+              },
+              "status": "SAT"
+            },
+            {
+              "first_breach_s": null,
+              "observed_margin": 0.523812404507097,
+              "rule": {
+                "bound": 0.7,
+                "op": "le",
+                "scale": 0.7,
+                "signal": "tilt",
+                "unit": "rad"
+              },
+              "status": "SAT"
+            },
+            {
+              "first_breach_s": null,
+              "observed_margin": 0.6898773614605854,
+              "rule": {
+                "bound": 6.0,
+                "op": "le",
+                "scale": 6.0,
+                "signal": "post_event_travel",
+                "unit": "m"
+              },
+              "status": "SAT"
+            }
+          ],
+          "overall": "VIOLATED",
+          "recovery": {
+            "completion_s": null,
+            "response_s": null,
+            "robustness": -0.05198610041778101,
+            "status": "VIOLATED",
+            "trigger_s": 2.0
+          },
+          "sample_count": 401,
+          "telemetry_errors": []
+        }
+      },
+      "heldout": {
+        "guarded_failsafe": {
+          "attempts": 40,
+          "conclusive_exercised": 40,
+          "counts": {
+            "INCONCLUSIVE": 0,
+            "NOT_EXERCISED": 0,
+            "SAT": 13,
+            "VIOLATED": 27
+          },
+          "failure_fraction": 0.675,
+          "scope": "Only the declared synthetic sampling distribution; not field reliability.",
+          "wilson_95": [
+            0.5201774618987768,
+            0.799154977682173
+          ]
+        },
+        "legacy_nav_gated": {
+          "attempts": 40,
+          "conclusive_exercised": 40,
+          "counts": {
+            "INCONCLUSIVE": 0,
+            "NOT_EXERCISED": 0,
+            "SAT": 9,
+            "VIOLATED": 31
+          },
+          "failure_fraction": 0.775,
+          "scope": "Only the declared synthetic sampling distribution; not field reliability.",
+          "wilson_95": [
+            0.6249690325768998,
+            0.8768390867645927
+          ]
+        }
+      },
+      "isolated_outage": {
+        "guarded_failsafe": {
+          "contract_hash": "e3e52ee0626066ef4082730d22b823fbe9079e0ec82a16af182d8ce3354eb11d",
+          "controller": "guarded_failsafe",
+          "environment": {
+            "machine": "x86_64",
+            "mujoco": "3.16.0",
+            "numpy": "2.5.4",
+            "python": "3.12.14",
+            "system": "Linux"
+          },
+          "metrics": {
+            "contact_samples": 0,
+            "max_actuator_force": 4.2330310625479965,
+            "max_est_error_m": 0.07381891885315549,
+            "max_speed_mps": 1.6,
+            "saturated_fraction": 0.0
+          },
+          "oracle_agreement": true,
+          "physics_dt": 0.005,
+          "scenario": {
+            "actuator_end": 6.0,
+            "actuator_index": 0,
+            "actuator_start": 1.8,
+            "authority": 1.0,
+            "event_s": 2.0,
+            "friction": 0.9,
+            "imu_bias": 0.0,
+            "initial_yaw": 0.0,
+            "lag_scale": 1.0,
+            "latency": 0.04,
+            "model": "multirotor",
+            "name": "development-long-outage",
+            "nav_bias": 0.0,
+            "nav_duration": 2.3,
+            "nav_kind": "dropout",
+            "nav_start": 1.8,
+            "seed": 4101,
+            "wind": 0.0,
+            "wind_end": 6.0,
+            "wind_start": 2.0,
+            "wind_y": 0.0
+          },
+          "schema": "crucible-evidence/2",
+          "source_hash": "d223db1b8ef4bc09cc9ed448e344c1496d16336ad966bfdbe94de747f5264fe1",
+          "trace_hash": "ce80aed0c0d43971fde86d7c3f9f80f56301e558c12140cc4a1047c53fc1aacd",
+          "verdict": {
+            "invariants": [
+              {
+                "first_breach_s": null,
+                "observed_margin": 0.6682358745837054,
+                "rule": {
+                  "bound": 0.6,
+                  "op": "ge",
+                  "scale": 2.0,
+                  "signal": "z",
+                  "unit": "m"
+                },
+                "status": "SAT"
+              },
+              {
+                "first_breach_s": null,
+                "observed_margin": 0.6951773850769483,
+                "rule": {
+                  "bound": 3.4,
+                  "op": "le",
+                  "scale": 2.0,
+                  "signal": "z",
+                  "unit": "m"
+                },
+                "status": "SAT"
+              },
+              {
+                "first_breach_s": null,
+                "observed_margin": 0.5597184695555477,
+                "rule": {
+                  "bound": 0.7,
+                  "op": "le",
+                  "scale": 0.7,
+                  "signal": "tilt",
+                  "unit": "rad"
+                },
+                "status": "SAT"
+              },
+              {
+                "first_breach_s": null,
+                "observed_margin": 0.885042603651684,
+                "rule": {
+                  "bound": 6.0,
+                  "op": "le",
+                  "scale": 6.0,
+                  "signal": "post_event_travel",
+                  "unit": "m"
+                },
+                "status": "SAT"
+              }
+            ],
+            "overall": "SAT",
+            "recovery": {
+              "completion_s": 3.14,
+              "response_s": 1.1400000000000001,
+              "robustness": 0.07300263241505214,
+              "status": "SAT",
+              "trigger_s": 2.0
+            },
+            "sample_count": 401,
+            "telemetry_errors": []
+          }
+        },
+        "legacy_nav_gated": {
+          "contract_hash": "e3e52ee0626066ef4082730d22b823fbe9079e0ec82a16af182d8ce3354eb11d",
+          "controller": "legacy_nav_gated",
+          "environment": {
+            "machine": "x86_64",
+            "mujoco": "3.16.0",
+            "numpy": "2.5.4",
+            "python": "3.12.14",
+            "system": "Linux"
+          },
+          "metrics": {
+            "contact_samples": 0,
+            "max_actuator_force": 4.326620539651286,
+            "max_est_error_m": 0.09696562885883152,
+            "max_speed_mps": 1.6,
+            "saturated_fraction": 0.0
+          },
+          "oracle_agreement": true,
+          "physics_dt": 0.005,
+          "scenario": {
+            "actuator_end": 6.0,
+            "actuator_index": 0,
+            "actuator_start": 1.8,
+            "authority": 1.0,
+            "event_s": 2.0,
+            "friction": 0.9,
+            "imu_bias": 0.0,
+            "initial_yaw": 0.0,
+            "lag_scale": 1.0,
+            "latency": 0.04,
+            "model": "multirotor",
+            "name": "development-long-outage",
+            "nav_bias": 0.0,
+            "nav_duration": 2.3,
+            "nav_kind": "dropout",
+            "nav_start": 1.8,
+            "seed": 4101,
+            "wind": 0.0,
+            "wind_end": 6.0,
+            "wind_start": 2.0,
+            "wind_y": 0.0
+          },
+          "schema": "crucible-evidence/2",
+          "source_hash": "d223db1b8ef4bc09cc9ed448e344c1496d16336ad966bfdbe94de747f5264fe1",
+          "trace_hash": "164a021611a23dc73bbffa8bfbae084f5d03bf8ee7e78c64a979981cb72902d7",
+          "verdict": {
+            "invariants": [
+              {
+                "first_breach_s": null,
+                "observed_margin": 0.6684547859186369,
+                "rule": {
+                  "bound": 0.6,
+                  "op": "ge",
+                  "scale": 2.0,
+                  "signal": "z",
+                  "unit": "m"
+                },
+                "status": "SAT"
+              },
+              {
+                "first_breach_s": null,
+                "observed_margin": 0.6951786363822205,
+                "rule": {
+                  "bound": 3.4,
+                  "op": "le",
+                  "scale": 2.0,
+                  "signal": "z",
+                  "unit": "m"
+                },
+                "status": "SAT"
+              },
+              {
+                "first_breach_s": null,
+                "observed_margin": 0.5644191864135006,
+                "rule": {
+                  "bound": 0.7,
+                  "op": "le",
+                  "scale": 0.7,
+                  "signal": "tilt",
+                  "unit": "rad"
+                },
+                "status": "SAT"
+              },
+              {
+                "first_breach_s": null,
+                "observed_margin": 0.3720366381324471,
+                "rule": {
+                  "bound": 6.0,
+                  "op": "le",
+                  "scale": 6.0,
+                  "signal": "post_event_travel",
+                  "unit": "m"
+                },
+                "status": "SAT"
+              }
+            ],
+            "overall": "VIOLATED",
+            "recovery": {
+              "completion_s": null,
+              "response_s": null,
+              "robustness": -0.7198604271549084,
+              "status": "VIOLATED",
+              "trigger_s": 2.0
+            },
+            "sample_count": 401,
+            "telemetry_errors": []
+          }
+        }
+      },
+      "nominal": {
+        "guarded_failsafe": {
+          "contract_hash": "e3e52ee0626066ef4082730d22b823fbe9079e0ec82a16af182d8ce3354eb11d",
+          "controller": "guarded_failsafe",
+          "environment": {
+            "machine": "x86_64",
+            "mujoco": "3.16.0",
+            "numpy": "2.5.4",
+            "python": "3.12.14",
+            "system": "Linux"
+          },
+          "metrics": {
+            "contact_samples": 0,
+            "max_actuator_force": 4.276347532582701,
+            "max_est_error_m": 0.06225196694719983,
+            "max_speed_mps": 1.6,
+            "saturated_fraction": 0.0
+          },
+          "oracle_agreement": true,
+          "physics_dt": 0.005,
+          "scenario": {
+            "actuator_end": 6.0,
+            "actuator_index": 0,
+            "actuator_start": 1.8,
+            "authority": 1.0,
+            "event_s": 2.0,
+            "friction": 0.9,
+            "imu_bias": 0.0,
+            "initial_yaw": 0.0,
+            "lag_scale": 1.0,
+            "latency": 0.04,
+            "model": "multirotor",
+            "name": "nominal",
+            "nav_bias": 0.0,
+            "nav_duration": 0.0,
+            "nav_kind": "dropout",
+            "nav_start": 1.8,
+            "seed": 4101,
+            "wind": 0.0,
+            "wind_end": 6.0,
+            "wind_start": 2.0,
+            "wind_y": 0.0
+          },
+          "schema": "crucible-evidence/2",
+          "source_hash": "d223db1b8ef4bc09cc9ed448e344c1496d16336ad966bfdbe94de747f5264fe1",
+          "trace_hash": "350eea86893108de02b44c8805c9cc7f078d5037a0e675878fad279a30e90ebf",
+          "verdict": {
+            "invariants": [
+              {
+                "first_breach_s": null,
+                "observed_margin": 0.692500216872201,
+                "rule": {
+                  "bound": 0.6,
+                  "op": "ge",
+                  "scale": 2.0,
+                  "signal": "z",
+                  "unit": "m"
+                },
+                "status": "SAT"
+              },
+              {
+                "first_breach_s": null,
+                "observed_margin": 0.6947443169257157,
+                "rule": {
+                  "bound": 3.4,
+                  "op": "le",
+                  "scale": 2.0,
+                  "signal": "z",
+                  "unit": "m"
+                },
+                "status": "SAT"
+              },
+              {
+                "first_breach_s": null,
+                "observed_margin": 0.5435006880355538,
+                "rule": {
+                  "bound": 0.7,
+                  "op": "le",
+                  "scale": 0.7,
+                  "signal": "tilt",
+                  "unit": "rad"
+                },
+                "status": "SAT"
+              },
+              {
+                "first_breach_s": null,
+                "observed_margin": 0.8894483916493199,
+                "rule": {
+                  "bound": 6.0,
+                  "op": "le",
+                  "scale": 6.0,
+                  "signal": "post_event_travel",
+                  "unit": "m"
+                },
+                "status": "SAT"
+              }
+            ],
+            "overall": "SAT",
+            "recovery": {
+              "completion_s": 3.12,
+              "response_s": 1.12,
+              "robustness": 0.09397876222815853,
+              "status": "SAT",
+              "trigger_s": 2.0
+            },
+            "sample_count": 401,
+            "telemetry_errors": []
+          }
+        },
+        "legacy_nav_gated": {
+          "contract_hash": "e3e52ee0626066ef4082730d22b823fbe9079e0ec82a16af182d8ce3354eb11d",
+          "controller": "legacy_nav_gated",
+          "environment": {
+            "machine": "x86_64",
+            "mujoco": "3.16.0",
+            "numpy": "2.5.4",
+            "python": "3.12.14",
+            "system": "Linux"
+          },
+          "metrics": {
+            "contact_samples": 0,
+            "max_actuator_force": 4.2531172198116645,
+            "max_est_error_m": 0.06178828157715746,
+            "max_speed_mps": 1.6,
+            "saturated_fraction": 0.0
+          },
+          "oracle_agreement": true,
+          "physics_dt": 0.005,
+          "scenario": {
+            "actuator_end": 6.0,
+            "actuator_index": 0,
+            "actuator_start": 1.8,
+            "authority": 1.0,
+            "event_s": 2.0,
+            "friction": 0.9,
+            "imu_bias": 0.0,
+            "initial_yaw": 0.0,
+            "lag_scale": 1.0,
+            "latency": 0.04,
+            "model": "multirotor",
+            "name": "nominal",
+            "nav_bias": 0.0,
+            "nav_duration": 0.0,
+            "nav_kind": "dropout",
+            "nav_start": 1.8,
+            "seed": 4101,
+            "wind": 0.0,
+            "wind_end": 6.0,
+            "wind_start": 2.0,
+            "wind_y": 0.0
+          },
+          "schema": "crucible-evidence/2",
+          "source_hash": "d223db1b8ef4bc09cc9ed448e344c1496d16336ad966bfdbe94de747f5264fe1",
+          "trace_hash": "ab96c79b0a83133f0307708e5bfc997c423ba97140be703cbb675d75dd02a673",
+          "verdict": {
+            "invariants": [
+              {
+                "first_breach_s": null,
+                "observed_margin": 0.692796252850489,
+                "rule": {
+                  "bound": 0.6,
+                  "op": "ge",
+                  "scale": 2.0,
+                  "signal": "z",
+                  "unit": "m"
+                },
+                "status": "SAT"
+              },
+              {
+                "first_breach_s": null,
+                "observed_margin": 0.6946856213352244,
+                "rule": {
+                  "bound": 3.4,
+                  "op": "le",
+                  "scale": 2.0,
+                  "signal": "z",
+                  "unit": "m"
+                },
+                "status": "SAT"
+              },
+              {
+                "first_breach_s": null,
+                "observed_margin": 0.549544837214259,
+                "rule": {
+                  "bound": 0.7,
+                  "op": "le",
+                  "scale": 0.7,
+                  "signal": "tilt",
+                  "unit": "rad"
+                },
+                "status": "SAT"
+              },
+              {
+                "first_breach_s": null,
+                "observed_margin": 0.8803055654845697,
+                "rule": {
+                  "bound": 6.0,
+                  "op": "le",
+                  "scale": 6.0,
+                  "signal": "post_event_travel",
+                  "unit": "m"
+                },
+                "status": "SAT"
+              }
+            ],
+            "overall": "SAT",
+            "recovery": {
+              "completion_s": 3.16,
+              "response_s": 1.16,
+              "robustness": 0.09574423437488622,
+              "status": "SAT",
+              "trigger_s": 2.0
+            },
+            "sample_count": 401,
+            "telemetry_errors": []
+          }
+        }
+      },
+      "not_exercised_status": "NOT_EXERCISED",
+      "original": {
+        "contract_hash": "e3e52ee0626066ef4082730d22b823fbe9079e0ec82a16af182d8ce3354eb11d",
+        "controller": "legacy_nav_gated",
+        "environment": {
+          "machine": "x86_64",
+          "mujoco": "3.16.0",
+          "numpy": "2.5.4",
+          "python": "3.12.14",
+          "system": "Linux"
+        },
+        "metrics": {
+          "contact_samples": 128,
+          "max_actuator_force": 7.48495666445826,
+          "max_est_error_m": 0.36652814867060973,
+          "max_speed_mps": 2.7728290324264,
+          "saturated_fraction": 0.6907730673316709
+        },
+        "oracle_agreement": true,
+        "physics_dt": 0.005,
+        "scenario": {
+          "actuator_end": 6.0,
+          "actuator_index": 2,
+          "actuator_start": 1.8,
+          "authority": 0.46813253457287946,
+          "event_s": 2.0,
+          "friction": 0.9,
+          "imu_bias": -0.03406901259569652,
+          "initial_yaw": -0.003143435960157763,
+          "lag_scale": 2.4970873575690766,
+          "latency": 0.06111920752021889,
+          "model": "multirotor",
+          "name": "search-shifted_halton-11",
+          "nav_bias": 2.4733612031582295,
+          "nav_duration": 0.44,
+          "nav_kind": "stale",
+          "nav_start": 1.8,
+          "seed": 4101,
+          "wind": 1.5766417365761352,
+          "wind_end": 6.0,
+          "wind_start": 2.0,
+          "wind_y": 4.165602530011856
+        },
+        "schema": "crucible-evidence/2",
+        "source_hash": "d223db1b8ef4bc09cc9ed448e344c1496d16336ad966bfdbe94de747f5264fe1",
+        "trace_hash": "5145a94c028de8269b0c06a9345f0a3e88e8a7a5a7e1dfbb5c77c6d0660e78b8",
+        "verdict": {
+          "invariants": [
+            {
+              "first_breach_s": 2.74,
+              "observed_margin": -0.27866466846521604,
+              "rule": {
+                "bound": 0.6,
+                "op": "ge",
+                "scale": 2.0,
+                "signal": "z",
+                "unit": "m"
+              },
+              "status": "VIOLATED"
+            },
+            {
+              "first_breach_s": null,
+              "observed_margin": 0.697573566983605,
+              "rule": {
+                "bound": 3.4,
+                "op": "le",
+                "scale": 2.0,
+                "signal": "z",
+                "unit": "m"
+              },
+              "status": "SAT"
+            },
+            {
+              "first_breach_s": 2.2,
+              "observed_margin": -3.4879894488071805,
+              "rule": {
+                "bound": 0.7,
+                "op": "le",
+                "scale": 0.7,
+                "signal": "tilt",
+                "unit": "rad"
+              },
+              "status": "VIOLATED"
+            },
+            {
+              "first_breach_s": null,
+              "observed_margin": 0.7570650913327053,
+              "rule": {
+                "bound": 6.0,
+                "op": "le",
+                "scale": 6.0,
+                "signal": "post_event_travel",
+                "unit": "m"
+              },
+              "status": "SAT"
+            }
+          ],
+          "overall": "VIOLATED",
+          "recovery": {
+            "completion_s": null,
+            "response_s": null,
+            "robustness": -3.841951929100215,
+            "status": "VIOLATED",
+            "trigger_s": 2.0
+          },
+          "sample_count": 401,
+          "telemetry_errors": []
+        }
+      },
+      "paired": {
+        "both_sat": 8,
+        "both_violated": 26,
+        "guarded_only_violated": 1,
+        "legacy_only_violated": 5,
+        "other": 0
+      },
+      "reduced": {
+        "contract_hash": "e3e52ee0626066ef4082730d22b823fbe9079e0ec82a16af182d8ce3354eb11d",
+        "controller": "legacy_nav_gated",
+        "environment": {
+          "machine": "x86_64",
+          "mujoco": "3.16.0",
+          "numpy": "2.5.4",
+          "python": "3.12.14",
+          "system": "Linux"
+        },
+        "metrics": {
+          "contact_samples": 0,
+          "max_actuator_force": 4.477058347296784,
+          "max_est_error_m": 0.06048779058542014,
+          "max_speed_mps": 1.6,
+          "saturated_fraction": 0.0
+        },
+        "oracle_agreement": true,
+        "physics_dt": 0.005,
+        "scenario": {
+          "actuator_end": 6.0,
+          "actuator_index": 2,
+          "actuator_start": 1.8,
+          "authority": 1.0,
+          "event_s": 2.0,
+          "friction": 0.9,
+          "imu_bias": 0.0,
+          "initial_yaw": 0.0,
+          "lag_scale": 1.0,
+          "latency": 0.04,
+          "model": "multirotor",
+          "name": "search-shifted_halton-11",
+          "nav_bias": 2.4733612031582295,
+          "nav_duration": 0.0,
+          "nav_kind": "stale",
+          "nav_start": 1.8,
+          "seed": 4101,
+          "wind": 1.5766417365761352,
+          "wind_end": 6.0,
+          "wind_start": 2.0,
+          "wind_y": 4.165602530011856
+        },
+        "schema": "crucible-evidence/2",
+        "source_hash": "d223db1b8ef4bc09cc9ed448e344c1496d16336ad966bfdbe94de747f5264fe1",
+        "trace_hash": "41c5365709c438b0f9e2a7e1f4e51e079d91dcd6b0fa861d6fed325d7748e6be",
+        "verdict": {
+          "invariants": [
+            {
+              "first_breach_s": null,
+              "observed_margin": 0.6944874210924026,
+              "rule": {
+                "bound": 0.6,
+                "op": "ge",
+                "scale": 2.0,
+                "signal": "z",
+                "unit": "m"
+              },
+              "status": "SAT"
+            },
+            {
+              "first_breach_s": null,
+              "observed_margin": 0.6946931753998895,
+              "rule": {
+                "bound": 3.4,
+                "op": "le",
+                "scale": 2.0,
+                "signal": "z",
+                "unit": "m"
+              },
+              "status": "SAT"
+            },
+            {
+              "first_breach_s": null,
+              "observed_margin": 0.5252901560338029,
+              "rule": {
+                "bound": 0.7,
+                "op": "le",
+                "scale": 0.7,
+                "signal": "tilt",
+                "unit": "rad"
+              },
+              "status": "SAT"
+            },
+            {
+              "first_breach_s": null,
+              "observed_margin": 0.6502659675999468,
+              "rule": {
+                "bound": 6.0,
+                "op": "le",
+                "scale": 6.0,
+                "signal": "post_event_travel",
+                "unit": "m"
+              },
+              "status": "SAT"
+            }
+          ],
+          "overall": "VIOLATED",
+          "recovery": {
+            "completion_s": null,
+            "response_s": null,
+            "robustness": -0.11250697539299769,
+            "status": "VIOLATED",
+            "trigger_s": 2.0
+          },
+          "sample_count": 401,
+          "telemetry_errors": []
+        }
+      },
+      "reduction": {
+        "confirmation_seeds": [
+          4101,
+          4102,
+          4103
+        ],
+        "final_cost": 0.8907983745731688,
+        "fraction_reduced": 0.762575806950438,
+        "initial_cost": 3.751927565305932,
+        "optimality": "Greedy budget-bounded local reduction only; not a minimum or diagnosis.",
+        "selected_property": "recovery VIOLATED",
+        "simulation_budget": 72,
+        "simulations": 31,
+        "status": "REDUCED"
+      },
+      "replay": {
+        "checkpoint_resume": {
+          "grade": "EXACT",
+          "max_absolute_difference": 0.0
+        },
+        "guarded_saved_file": {
+          "grade": "EXACT",
+          "max_absolute_difference": 0.0
+        },
+        "incompatible_source_negative_control": {
+          "grade": "INCOMPATIBLE",
+          "reason": "Source, contract or environment mismatch; no exact replay claim"
+        },
+        "perturbed_state_negative_control": {
+          "atol": 1e-08,
+          "first_outside_tolerance": "row[140].vx",
+          "grade": "DIVERGENT",
+          "max_absolute_difference": 0.1,
+          "rtol": 1e-08,
+          "verdict_equal": false
+        },
+        "reduced_saved_file": {
+          "grade": "EXACT",
+          "max_absolute_difference": 0.0
+        }
+      },
+      "search": {
+        "random": {
+          "best_score": -2.036826406150715,
+          "budget": 12,
+          "eligible": 12,
+          "recovery_violations": 9
+        },
+        "shifted_halton": {
+          "best_score": -3.841951929100215,
+          "budget": 12,
+          "eligible": 12,
+          "recovery_violations": 10
+        }
+      },
+      "short_trace_status": "INCONCLUSIVE",
+      "timestep_sensitivity": {
+        "coarse_dt_s": 0.005,
+        "coarse_verdict": {
+          "invariants": [
+            {
+              "first_breach_s": null,
+              "observed_margin": 0.6944874210924026,
+              "rule": {
+                "bound": 0.6,
+                "op": "ge",
+                "scale": 2.0,
+                "signal": "z",
+                "unit": "m"
+              },
+              "status": "SAT"
+            },
+            {
+              "first_breach_s": null,
+              "observed_margin": 0.6946931753998895,
+              "rule": {
+                "bound": 3.4,
+                "op": "le",
+                "scale": 2.0,
+                "signal": "z",
+                "unit": "m"
+              },
+              "status": "SAT"
+            },
+            {
+              "first_breach_s": null,
+              "observed_margin": 0.5252901560338029,
+              "rule": {
+                "bound": 0.7,
+                "op": "le",
+                "scale": 0.7,
+                "signal": "tilt",
+                "unit": "rad"
+              },
+              "status": "SAT"
+            },
+            {
+              "first_breach_s": null,
+              "observed_margin": 0.6502659675999468,
+              "rule": {
+                "bound": 6.0,
+                "op": "le",
+                "scale": 6.0,
+                "signal": "post_event_travel",
+                "unit": "m"
+              },
+              "status": "SAT"
+            }
+          ],
+          "overall": "VIOLATED",
+          "recovery": {
+            "completion_s": null,
+            "response_s": null,
+            "robustness": -0.11250697539299769,
+            "status": "VIOLATED",
+            "trigger_s": 2.0
+          },
+          "sample_count": 401,
+          "telemetry_errors": []
+        },
+        "fine_dt_s": 0.0025,
+        "fine_verdict": {
+          "invariants": [
+            {
+              "first_breach_s": null,
+              "observed_margin": 0.6944823259192785,
+              "rule": {
+                "bound": 0.6,
+                "op": "ge",
+                "scale": 2.0,
+                "signal": "z",
+                "unit": "m"
+              },
+              "status": "SAT"
+            },
+            {
+              "first_breach_s": null,
+              "observed_margin": 0.694702844739739,
+              "rule": {
+                "bound": 3.4,
+                "op": "le",
+                "scale": 2.0,
+                "signal": "z",
+                "unit": "m"
+              },
+              "status": "SAT"
+            },
+            {
+              "first_breach_s": null,
+              "observed_margin": 0.5261766929178527,
+              "rule": {
+                "bound": 0.7,
+                "op": "le",
+                "scale": 0.7,
+                "signal": "tilt",
+                "unit": "rad"
+              },
+              "status": "SAT"
+            },
+            {
+              "first_breach_s": null,
+              "observed_margin": 0.6502098141236644,
+              "rule": {
+                "bound": 6.0,
+                "op": "le",
+                "scale": 6.0,
+                "signal": "post_event_travel",
+                "unit": "m"
+              },
+              "status": "SAT"
+            }
+          ],
+          "overall": "VIOLATED",
+          "recovery": {
+            "completion_s": null,
+            "response_s": null,
+            "robustness": -0.11275530803668991,
+            "status": "VIOLATED",
+            "trigger_s": 2.0
+          },
+          "sample_count": 401,
+          "telemetry_errors": []
+        },
+        "max_altitude_difference_m": 0.0002199647883469602,
+        "max_speed_difference_mps": 0.001827872761697158,
+        "meaning": "One-case timestep sensitivity, not continuous-time safety or a convergence proof.",
+        "overall_changed": false
+      }
+    },
+    "rover": {
+      "guarded_on_reduced": {
+        "contract_hash": "e3e52ee0626066ef4082730d22b823fbe9079e0ec82a16af182d8ce3354eb11d",
+        "controller": "guarded_failsafe",
+        "environment": {
+          "machine": "x86_64",
+          "mujoco": "3.16.0",
+          "numpy": "2.5.4",
+          "python": "3.12.14",
+          "system": "Linux"
+        },
+        "metrics": {
+          "contact_samples": 374,
+          "max_actuator_force": 1.18629155426345,
+          "max_est_error_m": 0.050942820480166635,
+          "max_speed_mps": 1.2,
+          "saturated_fraction": 0.012468827930174564
+        },
+        "oracle_agreement": true,
+        "physics_dt": 0.005,
+        "scenario": {
+          "actuator_end": 6.0,
+          "actuator_index": 0,
+          "actuator_start": 1.8,
+          "authority": 1.0,
+          "event_s": 2.0,
+          "friction": 0.9,
+          "imu_bias": 0.0,
+          "initial_yaw": 0.0,
+          "lag_scale": 1.0,
+          "latency": 0.04,
+          "model": "rover",
+          "name": "search-shifted_halton-06",
+          "nav_bias": 1.1575717294740198,
+          "nav_duration": 2.1,
+          "nav_kind": "dropout",
+          "nav_start": 1.8,
+          "seed": 4101,
+          "wind": 0.0,
+          "wind_end": 6.0,
+          "wind_start": 2.0,
+          "wind_y": 0.0
+        },
+        "schema": "crucible-evidence/2",
+        "source_hash": "d223db1b8ef4bc09cc9ed448e344c1496d16336ad966bfdbe94de747f5264fe1",
+        "trace_hash": "f12a6cf1c73f6a25b131aabbe43dac2ebaeed671f17864a2056b9e0b8fc7ed37",
+        "verdict": {
+          "invariants": [
+            {
+              "first_breach_s": null,
+              "observed_margin": 1.3333333333333333,
+              "rule": {
+                "bound": 2.8,
+                "op": "le",
+                "scale": 1.2,
+                "signal": "speed",
+                "unit": "m/s"
+              },
+              "status": "SAT"
+            },
+            {
+              "first_breach_s": null,
+              "observed_margin": 0.998751473843355,
+              "rule": {
+                "bound": 0.61,
+                "op": "le",
+                "scale": 0.61,
+                "signal": "tilt",
+                "unit": "rad"
+              },
+              "status": "SAT"
+            },
+            {
+              "first_breach_s": null,
+              "observed_margin": 0.9399743470335594,
+              "rule": {
+                "bound": 4.5,
+                "op": "le",
+                "scale": 4.5,
+                "signal": "post_event_travel",
+                "unit": "m"
+              },
+              "status": "SAT"
+            }
+          ],
+          "overall": "SAT",
+          "recovery": {
+            "completion_s": 2.8000000000000003,
+            "response_s": 0.8,
+            "robustness": 0.16666557736229484,
+            "status": "SAT",
+            "trigger_s": 2.0
+          },
+          "sample_count": 401,
+          "telemetry_errors": []
+        }
+      },
+      "heldout": {
+        "guarded_failsafe": {
+          "attempts": 40,
+          "conclusive_exercised": 40,
+          "counts": {
+            "INCONCLUSIVE": 0,
+            "NOT_EXERCISED": 0,
+            "SAT": 40,
+            "VIOLATED": 0
+          },
+          "failure_fraction": 0.0,
+          "scope": "Only the declared synthetic sampling distribution; not field reliability.",
+          "wilson_95": [
+            0.0,
+            0.08762160119728664
+          ]
+        },
+        "legacy_nav_gated": {
+          "attempts": 40,
+          "conclusive_exercised": 40,
+          "counts": {
+            "INCONCLUSIVE": 0,
+            "NOT_EXERCISED": 0,
+            "SAT": 32,
+            "VIOLATED": 8
+          },
+          "failure_fraction": 0.2,
+          "scope": "Only the declared synthetic sampling distribution; not field reliability.",
+          "wilson_95": [
+            0.10499989725437704,
+            0.347573063463995
+          ]
+        }
+      },
+      "isolated_outage": {
+        "guarded_failsafe": {
+          "contract_hash": "e3e52ee0626066ef4082730d22b823fbe9079e0ec82a16af182d8ce3354eb11d",
+          "controller": "guarded_failsafe",
+          "environment": {
+            "machine": "x86_64",
+            "mujoco": "3.16.0",
+            "numpy": "2.5.4",
+            "python": "3.12.14",
+            "system": "Linux"
+          },
+          "metrics": {
+            "contact_samples": 374,
+            "max_actuator_force": 1.18629155426345,
+            "max_est_error_m": 0.050942820480166635,
+            "max_speed_mps": 1.2,
+            "saturated_fraction": 0.012468827930174564
+          },
+          "oracle_agreement": true,
+          "physics_dt": 0.005,
+          "scenario": {
+            "actuator_end": 6.0,
+            "actuator_index": 0,
+            "actuator_start": 1.8,
+            "authority": 1.0,
+            "event_s": 2.0,
+            "friction": 0.9,
+            "imu_bias": 0.0,
+            "initial_yaw": 0.0,
+            "lag_scale": 1.0,
+            "latency": 0.04,
+            "model": "rover",
+            "name": "development-long-outage",
+            "nav_bias": 0.0,
+            "nav_duration": 2.3,
+            "nav_kind": "dropout",
+            "nav_start": 1.8,
+            "seed": 4101,
+            "wind": 0.0,
+            "wind_end": 6.0,
+            "wind_start": 2.0,
+            "wind_y": 0.0
+          },
+          "schema": "crucible-evidence/2",
+          "source_hash": "d223db1b8ef4bc09cc9ed448e344c1496d16336ad966bfdbe94de747f5264fe1",
+          "trace_hash": "9cf228c4c54791e0fe1eaeb8b35fdcaaeb73acebb213fb8b1b6371377e2fa614",
+          "verdict": {
+            "invariants": [
+              {
+                "first_breach_s": null,
+                "observed_margin": 1.3333333333333333,
+                "rule": {
+                  "bound": 2.8,
+                  "op": "le",
+                  "scale": 1.2,
+                  "signal": "speed",
+                  "unit": "m/s"
+                },
+                "status": "SAT"
+              },
+              {
+                "first_breach_s": null,
+                "observed_margin": 0.998751473843355,
+                "rule": {
+                  "bound": 0.61,
+                  "op": "le",
+                  "scale": 0.61,
+                  "signal": "tilt",
+                  "unit": "rad"
+                },
+                "status": "SAT"
+              },
+              {
+                "first_breach_s": null,
+                "observed_margin": 0.9399743470335594,
+                "rule": {
+                  "bound": 4.5,
+                  "op": "le",
+                  "scale": 4.5,
+                  "signal": "post_event_travel",
+                  "unit": "m"
+                },
+                "status": "SAT"
+              }
+            ],
+            "overall": "SAT",
+            "recovery": {
+              "completion_s": 2.8000000000000003,
+              "response_s": 0.8,
+              "robustness": 0.16666557736229484,
+              "status": "SAT",
+              "trigger_s": 2.0
+            },
+            "sample_count": 401,
+            "telemetry_errors": []
+          }
+        },
+        "legacy_nav_gated": {
+          "contract_hash": "e3e52ee0626066ef4082730d22b823fbe9079e0ec82a16af182d8ce3354eb11d",
+          "controller": "legacy_nav_gated",
+          "environment": {
+            "machine": "x86_64",
+            "mujoco": "3.16.0",
+            "numpy": "2.5.4",
+            "python": "3.12.14",
+            "system": "Linux"
+          },
+          "metrics": {
+            "contact_samples": 342,
+            "max_actuator_force": 1.2071195674813442,
+            "max_est_error_m": 0.050942820480166635,
+            "max_speed_mps": 1.2,
+            "saturated_fraction": 0.014962593516209476
+          },
+          "oracle_agreement": true,
+          "physics_dt": 0.005,
+          "scenario": {
+            "actuator_end": 6.0,
+            "actuator_index": 0,
+            "actuator_start": 1.8,
+            "authority": 1.0,
+            "event_s": 2.0,
+            "friction": 0.9,
+            "imu_bias": 0.0,
+            "initial_yaw": 0.0,
+            "lag_scale": 1.0,
+            "latency": 0.04,
+            "model": "rover",
+            "name": "development-long-outage",
+            "nav_bias": 0.0,
+            "nav_duration": 2.3,
+            "nav_kind": "dropout",
+            "nav_start": 1.8,
+            "seed": 4101,
+            "wind": 0.0,
+            "wind_end": 6.0,
+            "wind_start": 2.0,
+            "wind_y": 0.0
+          },
+          "schema": "crucible-evidence/2",
+          "source_hash": "d223db1b8ef4bc09cc9ed448e344c1496d16336ad966bfdbe94de747f5264fe1",
+          "trace_hash": "5f95435cc487036d5d97691ac2d228ccdc686c9f9bc678349a10a353d940bd9f",
+          "verdict": {
+            "invariants": [
+              {
+                "first_breach_s": null,
+                "observed_margin": 1.3333333333333333,
+                "rule": {
+                  "bound": 2.8,
+                  "op": "le",
+                  "scale": 1.2,
+                  "signal": "speed",
+                  "unit": "m/s"
+                },
+                "status": "SAT"
+              },
+              {
+                "first_breach_s": null,
+                "observed_margin": 0.998529574393746,
+                "rule": {
+                  "bound": 0.61,
+                  "op": "le",
+                  "scale": 0.61,
+                  "signal": "tilt",
+                  "unit": "rad"
+                },
+                "status": "SAT"
+              },
+              {
+                "first_breach_s": null,
+                "observed_margin": 0.43737883958955437,
+                "rule": {
+                  "bound": 4.5,
+                  "op": "le",
+                  "scale": 4.5,
+                  "signal": "post_event_travel",
+                  "unit": "m"
+                },
+                "status": "SAT"
+              }
+            ],
+            "overall": "VIOLATED",
+            "recovery": {
+              "completion_s": null,
+              "response_s": null,
+              "robustness": -0.6668286389075662,
+              "status": "VIOLATED",
+              "trigger_s": 2.0
+            },
+            "sample_count": 401,
+            "telemetry_errors": []
+          }
+        }
+      },
+      "nominal": {
+        "guarded_failsafe": {
+          "contract_hash": "e3e52ee0626066ef4082730d22b823fbe9079e0ec82a16af182d8ce3354eb11d",
+          "controller": "guarded_failsafe",
+          "environment": {
+            "machine": "x86_64",
+            "mujoco": "3.16.0",
+            "numpy": "2.5.4",
+            "python": "3.12.14",
+            "system": "Linux"
+          },
+          "metrics": {
+            "contact_samples": 373,
+            "max_actuator_force": 1.2212992272284389,
+            "max_est_error_m": 0.050942820480166635,
+            "max_speed_mps": 1.2,
+            "saturated_fraction": 0.012468827930174564
+          },
+          "oracle_agreement": true,
+          "physics_dt": 0.005,
+          "scenario": {
+            "actuator_end": 6.0,
+            "actuator_index": 0,
+            "actuator_start": 1.8,
+            "authority": 1.0,
+            "event_s": 2.0,
+            "friction": 0.9,
+            "imu_bias": 0.0,
+            "initial_yaw": 0.0,
+            "lag_scale": 1.0,
+            "latency": 0.04,
+            "model": "rover",
+            "name": "nominal",
+            "nav_bias": 0.0,
+            "nav_duration": 0.0,
+            "nav_kind": "dropout",
+            "nav_start": 1.8,
+            "seed": 4101,
+            "wind": 0.0,
+            "wind_end": 6.0,
+            "wind_start": 2.0,
+            "wind_y": 0.0
+          },
+          "schema": "crucible-evidence/2",
+          "source_hash": "d223db1b8ef4bc09cc9ed448e344c1496d16336ad966bfdbe94de747f5264fe1",
+          "trace_hash": "6885961e75acc44f641052681fd7030946c315652d7fc0a92e9ec645aae51fb4",
+          "verdict": {
+            "invariants": [
+              {
+                "first_breach_s": null,
+                "observed_margin": 1.3333333333333333,
+                "rule": {
+                  "bound": 2.8,
+                  "op": "le",
+                  "scale": 1.2,
+                  "signal": "speed",
+                  "unit": "m/s"
+                },
+                "status": "SAT"
+              },
+              {
+                "first_breach_s": null,
+                "observed_margin": 0.998751473843355,
+                "rule": {
+                  "bound": 0.61,
+                  "op": "le",
+                  "scale": 0.61,
+                  "signal": "tilt",
+                  "unit": "rad"
+                },
+                "status": "SAT"
+              },
+              {
+                "first_breach_s": null,
+                "observed_margin": 0.9402393134618685,
+                "rule": {
+                  "bound": 4.5,
+                  "op": "le",
+                  "scale": 4.5,
+                  "signal": "post_event_travel",
+                  "unit": "m"
+                },
+                "status": "SAT"
+              }
+            ],
+            "overall": "SAT",
+            "recovery": {
+              "completion_s": 2.8000000000000003,
+              "response_s": 0.8,
+              "robustness": 0.16666487196737953,
+              "status": "SAT",
+              "trigger_s": 2.0
+            },
+            "sample_count": 401,
+            "telemetry_errors": []
+          }
+        },
+        "legacy_nav_gated": {
+          "contract_hash": "e3e52ee0626066ef4082730d22b823fbe9079e0ec82a16af182d8ce3354eb11d",
+          "controller": "legacy_nav_gated",
+          "environment": {
+            "machine": "x86_64",
+            "mujoco": "3.16.0",
+            "numpy": "2.5.4",
+            "python": "3.12.14",
+            "system": "Linux"
+          },
+          "metrics": {
+            "contact_samples": 375,
+            "max_actuator_force": 1.2198200887948178,
+            "max_est_error_m": 0.050942820480166635,
+            "max_speed_mps": 1.2,
+            "saturated_fraction": 0.014962593516209476
+          },
+          "oracle_agreement": true,
+          "physics_dt": 0.005,
+          "scenario": {
+            "actuator_end": 6.0,
+            "actuator_index": 0,
+            "actuator_start": 1.8,
+            "authority": 1.0,
+            "event_s": 2.0,
+            "friction": 0.9,
+            "imu_bias": 0.0,
+            "initial_yaw": 0.0,
+            "lag_scale": 1.0,
+            "latency": 0.04,
+            "model": "rover",
+            "name": "nominal",
+            "nav_bias": 0.0,
+            "nav_duration": 0.0,
+            "nav_kind": "dropout",
+            "nav_start": 1.8,
+            "seed": 4101,
+            "wind": 0.0,
+            "wind_end": 6.0,
+            "wind_start": 2.0,
+            "wind_y": 0.0
+          },
+          "schema": "crucible-evidence/2",
+          "source_hash": "d223db1b8ef4bc09cc9ed448e344c1496d16336ad966bfdbe94de747f5264fe1",
+          "trace_hash": "3fbedeedd115b6182854ed45e4415a15b59b5a5f14a4d23a8543b764a960d4ce",
+          "verdict": {
+            "invariants": [
+              {
+                "first_breach_s": null,
+                "observed_margin": 1.3333333333333333,
+                "rule": {
+                  "bound": 2.8,
+                  "op": "le",
+                  "scale": 1.2,
+                  "signal": "speed",
+                  "unit": "m/s"
+                },
+                "status": "SAT"
+              },
+              {
+                "first_breach_s": null,
+                "observed_margin": 0.998751473843355,
+                "rule": {
+                  "bound": 0.61,
+                  "op": "le",
+                  "scale": 0.61,
+                  "signal": "tilt",
+                  "unit": "rad"
+                },
+                "status": "SAT"
+              },
+              {
+                "first_breach_s": null,
+                "observed_margin": 0.9310578891781317,
+                "rule": {
+                  "bound": 4.5,
+                  "op": "le",
+                  "scale": 4.5,
+                  "signal": "post_event_travel",
+                  "unit": "m"
+                },
+                "status": "SAT"
+              }
+            ],
+            "overall": "SAT",
+            "recovery": {
+              "completion_s": 2.84,
+              "response_s": 0.84,
+              "robustness": 0.166664871764828,
+              "status": "SAT",
+              "trigger_s": 2.0
+            },
+            "sample_count": 401,
+            "telemetry_errors": []
+          }
+        }
+      },
+      "not_exercised_status": "NOT_EXERCISED",
+      "original": {
+        "contract_hash": "e3e52ee0626066ef4082730d22b823fbe9079e0ec82a16af182d8ce3354eb11d",
+        "controller": "legacy_nav_gated",
+        "environment": {
+          "machine": "x86_64",
+          "mujoco": "3.16.0",
+          "numpy": "2.5.4",
+          "python": "3.12.14",
+          "system": "Linux"
+        },
+        "metrics": {
+          "contact_samples": 397,
+          "max_actuator_force": 1.0317842200296614,
+          "max_est_error_m": 0.07568805152455503,
+          "max_speed_mps": 1.2,
+          "saturated_fraction": 0.017456359102244388
+        },
+        "oracle_agreement": true,
+        "physics_dt": 0.005,
+        "scenario": {
+          "actuator_end": 6.0,
+          "actuator_index": 0,
+          "actuator_start": 1.8,
+          "authority": 0.6922066086469536,
+          "event_s": 2.0,
+          "friction": 0.4625186298705972,
+          "imu_bias": -0.05342385130537392,
+          "initial_yaw": -0.024765057581779385,
+          "lag_scale": 2.0559108869808416,
+          "latency": 0.184196130597142,
+          "model": "rover",
+          "name": "search-shifted_halton-06",
+          "nav_bias": 1.1575717294740198,
+          "nav_duration": 2.1,
+          "nav_kind": "dropout",
+          "nav_start": 1.8,
+          "seed": 4101,
+          "wind": -4.213883644208721,
+          "wind_end": 6.0,
+          "wind_start": 2.0,
+          "wind_y": 0.5827791069340811
+        },
+        "schema": "crucible-evidence/2",
+        "source_hash": "d223db1b8ef4bc09cc9ed448e344c1496d16336ad966bfdbe94de747f5264fe1",
+        "trace_hash": "0f27245e1574630b0f061cecb09bd68ce48107b11a8af02bcb546e4def15057a",
+        "verdict": {
+          "invariants": [
+            {
+              "first_breach_s": null,
+              "observed_margin": 1.3333333333333333,
+              "rule": {
+                "bound": 2.8,
+                "op": "le",
+                "scale": 1.2,
+                "signal": "speed",
+                "unit": "m/s"
+              },
+              "status": "SAT"
+            },
+            {
+              "first_breach_s": null,
+              "observed_margin": 0.9989344865723522,
+              "rule": {
+                "bound": 0.61,
+                "op": "le",
+                "scale": 0.61,
+                "signal": "tilt",
+                "unit": "rad"
+              },
+              "status": "SAT"
+            },
+            {
+              "first_breach_s": null,
+              "observed_margin": 0.4459341159676991,
+              "rule": {
+                "bound": 4.5,
+                "op": "le",
+                "scale": 4.5,
+                "signal": "post_event_travel",
+                "unit": "m"
+              },
+              "status": "SAT"
+            }
+          ],
+          "overall": "VIOLATED",
+          "recovery": {
+            "completion_s": null,
+            "response_s": null,
+            "robustness": -0.626567141668255,
+            "status": "VIOLATED",
+            "trigger_s": 2.0
+          },
+          "sample_count": 401,
+          "telemetry_errors": []
+        }
+      },
+      "paired": {
+        "both_sat": 32,
+        "both_violated": 0,
+        "guarded_only_violated": 0,
+        "legacy_only_violated": 8,
+        "other": 0
+      },
+      "reduced": {
+        "contract_hash": "e3e52ee0626066ef4082730d22b823fbe9079e0ec82a16af182d8ce3354eb11d",
+        "controller": "legacy_nav_gated",
+        "environment": {
+          "machine": "x86_64",
+          "mujoco": "3.16.0",
+          "numpy": "2.5.4",
+          "python": "3.12.14",
+          "system": "Linux"
+        },
+        "metrics": {
+          "contact_samples": 343,
+          "max_actuator_force": 1.200583031121652,
+          "max_est_error_m": 0.050942820480166635,
+          "max_speed_mps": 1.2,
+          "saturated_fraction": 0.012468827930174564
+        },
+        "oracle_agreement": true,
+        "physics_dt": 0.005,
+        "scenario": {
+          "actuator_end": 6.0,
+          "actuator_index": 0,
+          "actuator_start": 1.8,
+          "authority": 1.0,
+          "event_s": 2.0,
+          "friction": 0.9,
+          "imu_bias": 0.0,
+          "initial_yaw": 0.0,
+          "lag_scale": 1.0,
+          "latency": 0.04,
+          "model": "rover",
+          "name": "search-shifted_halton-06",
+          "nav_bias": 1.1575717294740198,
+          "nav_duration": 2.1,
+          "nav_kind": "dropout",
+          "nav_start": 1.8,
+          "seed": 4101,
+          "wind": 0.0,
+          "wind_end": 6.0,
+          "wind_start": 2.0,
+          "wind_y": 0.0
+        },
+        "schema": "crucible-evidence/2",
+        "source_hash": "d223db1b8ef4bc09cc9ed448e344c1496d16336ad966bfdbe94de747f5264fe1",
+        "trace_hash": "3230adf814405cf75ccf8c3a1de06930fe3c8b0691628e94b84e8f4f37c7d721",
+        "verdict": {
+          "invariants": [
+            {
+              "first_breach_s": null,
+              "observed_margin": 1.3333333333333333,
+              "rule": {
+                "bound": 2.8,
+                "op": "le",
+                "scale": 1.2,
+                "signal": "speed",
+                "unit": "m/s"
+              },
+              "status": "SAT"
+            },
+            {
+              "first_breach_s": null,
+              "observed_margin": 0.998529574393746,
+              "rule": {
+                "bound": 0.61,
+                "op": "le",
+                "scale": 0.61,
+                "signal": "tilt",
+                "unit": "rad"
+              },
+              "status": "SAT"
+            },
+            {
+              "first_breach_s": null,
+              "observed_margin": 0.48385507818047885,
+              "rule": {
+                "bound": 4.5,
+                "op": "le",
+                "scale": 4.5,
+                "signal": "post_event_travel",
+                "unit": "m"
+              },
+              "status": "SAT"
+            }
+          ],
+          "overall": "VIOLATED",
+          "recovery": {
+            "completion_s": null,
+            "response_s": null,
+            "robustness": -0.22364283033647261,
+            "status": "VIOLATED",
+            "trigger_s": 2.0
+          },
+          "sample_count": 401,
+          "telemetry_errors": []
+        }
+      },
+      "reduction": {
+        "confirmation_seeds": [
+          4101,
+          4102,
+          4103
+        ],
+        "final_cost": 0.8750000000000001,
+        "fraction_reduced": 0.8432841332632811,
+        "initial_cost": 5.583352970060087,
+        "optimality": "Greedy budget-bounded local reduction only; not a minimum or diagnosis.",
+        "selected_property": "recovery VIOLATED",
+        "simulation_budget": 72,
+        "simulations": 34,
+        "status": "REDUCED"
+      },
+      "replay": {
+        "checkpoint_resume": {
+          "grade": "EXACT",
+          "max_absolute_difference": 0.0
+        },
+        "guarded_saved_file": {
+          "grade": "EXACT",
+          "max_absolute_difference": 0.0
+        },
+        "incompatible_source_negative_control": {
+          "grade": "INCOMPATIBLE",
+          "reason": "Source, contract or environment mismatch; no exact replay claim"
+        },
+        "perturbed_state_negative_control": {
+          "atol": 1e-08,
+          "first_outside_tolerance": "row[140].vx",
+          "grade": "DIVERGENT",
+          "max_absolute_difference": 6,
+          "rtol": 1e-08,
+          "verdict_equal": false
+        },
+        "reduced_saved_file": {
+          "grade": "EXACT",
+          "max_absolute_difference": 0.0
+        }
+      },
+      "search": {
+        "random": {
+          "best_score": -0.0278902908329582,
+          "budget": 12,
+          "eligible": 12,
+          "recovery_violations": 1
+        },
+        "shifted_halton": {
+          "best_score": -0.626567141668255,
+          "budget": 12,
+          "eligible": 12,
+          "recovery_violations": 1
+        }
+      },
+      "short_trace_status": "INCONCLUSIVE",
+      "timestep_sensitivity": {
+        "coarse_dt_s": 0.005,
+        "coarse_verdict": {
+          "invariants": [
+            {
+              "first_breach_s": null,
+              "observed_margin": 1.3333333333333333,
+              "rule": {
+                "bound": 2.8,
+                "op": "le",
+                "scale": 1.2,
+                "signal": "speed",
+                "unit": "m/s"
+              },
+              "status": "SAT"
+            },
+            {
+              "first_breach_s": null,
+              "observed_margin": 0.998529574393746,
+              "rule": {
+                "bound": 0.61,
+                "op": "le",
+                "scale": 0.61,
+                "signal": "tilt",
+                "unit": "rad"
+              },
+              "status": "SAT"
+            },
+            {
+              "first_breach_s": null,
+              "observed_margin": 0.48385507818047885,
+              "rule": {
+                "bound": 4.5,
+                "op": "le",
+                "scale": 4.5,
+                "signal": "post_event_travel",
+                "unit": "m"
+              },
+              "status": "SAT"
+            }
+          ],
+          "overall": "VIOLATED",
+          "recovery": {
+            "completion_s": null,
+            "response_s": null,
+            "robustness": -0.22364283033647261,
+            "status": "VIOLATED",
+            "trigger_s": 2.0
+          },
+          "sample_count": 401,
+          "telemetry_errors": []
+        },
+        "fine_dt_s": 0.0025,
+        "fine_verdict": {
+          "invariants": [
+            {
+              "first_breach_s": null,
+              "observed_margin": 1.3333333333333333,
+              "rule": {
+                "bound": 2.8,
+                "op": "le",
+                "scale": 1.2,
+                "signal": "speed",
+                "unit": "m/s"
+              },
+              "status": "SAT"
+            },
+            {
+              "first_breach_s": null,
+              "observed_margin": 0.9993226012110122,
+              "rule": {
+                "bound": 0.61,
+                "op": "le",
+                "scale": 0.61,
+                "signal": "tilt",
+                "unit": "rad"
+              },
+              "status": "SAT"
+            },
+            {
+              "first_breach_s": null,
+              "observed_margin": 0.4767840752101111,
+              "rule": {
+                "bound": 4.5,
+                "op": "le",
+                "scale": 4.5,
+                "signal": "post_event_travel",
+                "unit": "m"
+              },
+              "status": "SAT"
+            }
+          ],
+          "overall": "VIOLATED",
+          "recovery": {
+            "completion_s": null,
+            "response_s": null,
+            "robustness": -0.21671022730801728,
+            "status": "VIOLATED",
+            "trigger_s": 2.0
+          },
+          "sample_count": 401,
+          "telemetry_errors": []
+        },
+        "max_altitude_difference_m": 0.00014663806416881364,
+        "max_speed_difference_mps": 0.021651887370955247,
+        "meaning": "One-case timestep sensitivity, not continuous-time safety or a convergence proof.",
+        "overall_changed": false
+      }
+    }
+  },
+  "version": "0.2.0"
+}

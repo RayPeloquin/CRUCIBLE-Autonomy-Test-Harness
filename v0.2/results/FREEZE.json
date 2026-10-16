@@ -1,0 +1,220 @@
+{
+  "contract": {
+    "campaign": {
+      "actuator_fault_end_s": 6.0,
+      "authority": [
+        0.45,
+        1.0
+      ],
+      "bias_m": [
+        -2.5,
+        2.5
+      ],
+      "confirmation_seeds": [
+        4101,
+        4102,
+        4103
+      ],
+      "distribution": "Independent uniform coordinates over these illustrative ranges; wind magnitude uniform and azimuth uniform on [0,2pi); nav kind and weakened actuator index categorical. IMU constant bias x in +/-0.06 m/s^2 and initial yaw in +/-0.08 rad. No claim about field frequencies. Held-out draws are generated only after freezing source and contract.",
+      "fault_onset_s": 1.8,
+      "friction": [
+        0.25,
+        0.95
+      ],
+      "heldout_count_per_model": 40,
+      "heldout_seed": 87001,
+      "latency_s": [
+        0.04,
+        0.24
+      ],
+      "motor_lag_scale": [
+        1.0,
+        2.5
+      ],
+      "nav_duration_s": [
+        0.0,
+        2.4
+      ],
+      "nav_kinds": [
+        "dropout",
+        "stale",
+        "bias"
+      ],
+      "reduction_simulation_budget": 72,
+      "search_budget_per_method": 12,
+      "search_seed": 1729,
+      "wind_end_s": 6.0,
+      "wind_mps": [
+        0.0,
+        5.0
+      ],
+      "wind_onset_s": 2.0
+    },
+    "control_dt": 0.02,
+    "event": "operator_link_lost",
+    "event_s": 2.0,
+    "frame": "world ENU metres, seconds, radians; body x-forward y-left z-up",
+    "horizon_s": 8.0,
+    "models": {
+      "multirotor": {
+        "budget_reason": "Illustrative 6 m safety containment radius at 1.6 m/s cruise, altitude 2 m. 2.5 s response plus 0.5 s dwell; horizontal speed <=0.3 m/s, vertical speed <=0.25 m/s, altitude error <=0.35 m and displacement from actual loss location <=1.5 m all required together. These values require mission-owner approval for any physical vehicle.",
+        "controller": {
+          "altitude_gain": 3.5,
+          "attitude_gain": 1.8,
+          "cruise_v": 1.6,
+          "innovation_pos_m": 1.2,
+          "innovation_vel_mps": 2.5,
+          "nav_max_age_s": 0.2,
+          "position_gain": 0.7,
+          "rate_gain": 0.34,
+          "tilt_command_rad": 0.48,
+          "velocity_gain": 1.9,
+          "vertical_velocity_gain": 2.8
+        },
+        "deadline_s": 3.0,
+        "dwell_s": 0.5,
+        "invariants": [
+          {
+            "bound": 0.6,
+            "op": "ge",
+            "scale": 2.0,
+            "signal": "z",
+            "unit": "m"
+          },
+          {
+            "bound": 3.4,
+            "op": "le",
+            "scale": 2.0,
+            "signal": "z",
+            "unit": "m"
+          },
+          {
+            "bound": 0.7,
+            "op": "le",
+            "scale": 0.7,
+            "signal": "tilt",
+            "unit": "rad"
+          },
+          {
+            "bound": 6.0,
+            "op": "le",
+            "scale": 6.0,
+            "signal": "post_event_travel",
+            "unit": "m"
+          }
+        ],
+        "policy": "HOLD",
+        "targets": [
+          {
+            "bound": 0.3,
+            "op": "le",
+            "scale": 1.6,
+            "signal": "speed",
+            "unit": "m/s"
+          },
+          {
+            "bound": 0.25,
+            "op": "le",
+            "scale": 0.5,
+            "signal": "vertical_speed",
+            "unit": "m/s"
+          },
+          {
+            "bound": 0.35,
+            "op": "le",
+            "scale": 0.35,
+            "signal": "altitude_error",
+            "unit": "m"
+          },
+          {
+            "bound": 1.5,
+            "op": "le",
+            "scale": 1.5,
+            "signal": "post_event_travel",
+            "unit": "m"
+          }
+        ]
+      },
+      "rover": {
+        "budget_reason": "Illustrative 4.5 m stopping corridor at 1.2 m/s cruise. 2.2 s response plus 0.4 s dwell, below 3.75 s at unchanged cruise; kinematic reference only, contact/actuator feasibility must be tested.",
+        "controller": {
+          "cruise_v": 1.2,
+          "innovation_pos_m": 1.2,
+          "innovation_vel_mps": 2.5,
+          "nav_max_age_s": 0.2,
+          "speed_gain": 1.6,
+          "yaw_gain": 0.35,
+          "yaw_rate_gain": 0.12
+        },
+        "deadline_s": 2.6,
+        "dwell_s": 0.4,
+        "invariants": [
+          {
+            "bound": 2.8,
+            "op": "le",
+            "scale": 1.2,
+            "signal": "speed",
+            "unit": "m/s"
+          },
+          {
+            "bound": 0.61,
+            "op": "le",
+            "scale": 0.61,
+            "signal": "tilt",
+            "unit": "rad"
+          },
+          {
+            "bound": 4.5,
+            "op": "le",
+            "scale": 4.5,
+            "signal": "post_event_travel",
+            "unit": "m"
+          }
+        ],
+        "policy": "STOP",
+        "targets": [
+          {
+            "bound": 0.2,
+            "op": "le",
+            "scale": 1.2,
+            "signal": "speed",
+            "unit": "m/s"
+          }
+        ]
+      }
+    },
+    "name": "illustrative-stop-and-hold",
+    "physics_dt": 0.005,
+    "provenance": "Engineering demonstration budgets; not vehicle-approved requirements. Frozen before the recorded campaign, after disclosed development checks.",
+    "schema": "crucible-contract/2",
+    "semantics": "Reach AND finish the closed-grid dwell window by the deadline; safety invariants apply over the whole observed trace. No trigger with complete telemetry is NOT_EXERCISED."
+  },
+  "contract_hash": "e3e52ee0626066ef4082730d22b823fbe9079e0ec82a16af182d8ce3354eb11d",
+  "created_utc": "2026-10-16T07:14:03Z",
+  "development_disclosure": "Nominal, long-dropout and severe combined scenarios were inspected while developing models/controllers. These are development examples. Held-out seeds were not inspected/tuned. This is an internal pre-campaign freeze, not third-party preregistration.",
+  "environment": {
+    "machine": "x86_64",
+    "mujoco": "3.16.0",
+    "numpy": "2.5.4",
+    "python": "3.12.14",
+    "system": "Linux"
+  },
+  "schema": "crucible-freeze/2",
+  "source_hash": "d223db1b8ef4bc09cc9ed448e344c1496d16336ad966bfdbe94de747f5264fe1",
+  "source_manifest": {
+    "contracts/mission.json": "dc38632dea6c7646397b6a530b65e3ff2f0f7689551c55da1f0d81de8a64e048",
+    "crucible/__init__.py": "856a56f16870e01f06d40f18c2f5af6c8ec26338135cccc322f1d6732348dcd0",
+    "crucible/__main__.py": "8e82385e5e60d30d634e768959e85e0e9eb468a7516c5c9ac3f1fa662b99942b",
+    "crucible/campaign.py": "54989ef01fc9e555631f84a38cec1e2bf2cf11cc2b72af3747bf7edbce74d5cb",
+    "crucible/evidence.py": "6c8c9d43eccf6387b912f467522bf9eb12b7cbc5c12aafcab9f7406ea5e0c91b",
+    "crucible/monitor.py": "aec647215c48ea73b3aebc8ea762efd54dcc3c6dba8c840561d6ce8bc1e7ea36",
+    "crucible/runtime.py": "201bb3611088e831194125df4b46cba1b0d0c86f1d99acdbc7ef6c9152e49d05",
+    "models/multirotor.xml": "cc4d70f5baa78970a8796b1a409d535c80724b9aebad7472658be2333ffb945c",
+    "models/rover.xml": "bf79d025998e1d04d7a4fae46ce596e9aa324a07f52c8c51ee388b70e288102d",
+    "requirements.txt": "129b23477f90128249009785672281fa9b0e2a6a48ba333801be84f39b02af72",
+    "tests/test_campaign.py": "50de4fb602f314224172174d24b05dc67d350beaf58fa9bdd60339355c34f00d",
+    "tests/test_evidence.py": "e726876bbf55647863c47607ca028903c544baa3b9f773bba7852b9f5da58cfb",
+    "tests/test_monitor.py": "dcf98991e9032da36261fd42caf5bae6ab95913fb6c280632108ac1ca372d274",
+    "tests/test_physics.py": "c4607f2a68ea6131a9aeb77d7f6ab9e336a767c080e417ead69d9cc3e0ca36e4"
+  }
+}

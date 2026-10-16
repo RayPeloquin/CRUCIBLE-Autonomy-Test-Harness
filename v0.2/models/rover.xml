@@ -1,0 +1,31 @@
+<mujoco model="CRUCIBLE differential drive demonstrator">
+  <compiler angle="radian"/>
+  <option timestep="0.005" gravity="0 0 -9.81" integrator="implicitfast" cone="elliptic" iterations="60" tolerance="1e-10"/>
+  <default>
+    <geom solref="0.01 1" solimp="0.95 0.99 0.001"/>
+    <joint damping="0.015" armature="0.002"/>
+  </default>
+  <worldbody>
+    <light pos="0 -3 6"/>
+    <geom name="ground" type="plane" size="30 30 0.1" rgba="0.16 0.20 0.25 1" friction="0.9 0.005 0.0005"/>
+    <body name="chassis" pos="0 0 0.22">
+      <freejoint name="base"/>
+      <geom name="hull" type="box" size="0.26 0.18 0.07" mass="6" rgba="0.10 0.60 0.68 1"/>
+      <site name="imu" pos="0 0 0"/>
+      <body name="left_wheel" pos="0 0.23 -0.10">
+        <joint name="left_axle" axis="0 1 0"/>
+        <geom name="left_tire" type="cylinder" size="0.12 0.035" euler="1.57079632679 0 0" mass="0.3" priority="1" condim="4" friction="0.9 0.005 0.0005" rgba="0.08 0.09 0.11 1"/>
+      </body>
+      <body name="right_wheel" pos="0 -0.23 -0.10">
+        <joint name="right_axle" axis="0 1 0"/>
+        <geom name="right_tire" type="cylinder" size="0.12 0.035" euler="1.57079632679 0 0" mass="0.3" priority="1" condim="4" friction="0.9 0.005 0.0005" rgba="0.08 0.09 0.11 1"/>
+      </body>
+      <geom name="front_caster" type="sphere" pos="0.22 0 -0.18" size="0.04" mass="0.08" priority="1" condim="3" friction="0.015 0.001 0.0001"/>
+      <geom name="rear_caster" type="sphere" pos="-0.22 0 -0.18" size="0.04" mass="0.08" priority="1" condim="3" friction="0.015 0.001 0.0001"/>
+    </body>
+  </worldbody>
+  <actuator>
+    <general name="left_motor" joint="left_axle" dyntype="filterexact" dynprm="0.08" gaintype="fixed" gainprm="1" biastype="none" ctrllimited="true" ctrlrange="-1.5 1.5" forcelimited="true" forcerange="-1.5 1.5"/>
+    <general name="right_motor" joint="right_axle" dyntype="filterexact" dynprm="0.08" gaintype="fixed" gainprm="1" biastype="none" ctrllimited="true" ctrlrange="-1.5 1.5" forcelimited="true" forcerange="-1.5 1.5"/>
+  </actuator>
+</mujoco>

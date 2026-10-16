@@ -1,0 +1,67 @@
+{
+  "schema": "crucible-contract/2",
+  "name": "illustrative-stop-and-hold",
+  "provenance": "Engineering demonstration budgets; not vehicle-approved requirements. Frozen before the recorded campaign, after disclosed development checks.",
+  "frame": "world ENU metres, seconds, radians; body x-forward y-left z-up",
+  "control_dt": 0.02,
+  "physics_dt": 0.005,
+  "horizon_s": 8.0,
+  "event_s": 2.0,
+  "event": "operator_link_lost",
+  "semantics": "Reach AND finish the closed-grid dwell window by the deadline; safety invariants apply over the whole observed trace. No trigger with complete telemetry is NOT_EXERCISED.",
+  "models": {
+    "rover": {
+      "policy": "STOP",
+      "deadline_s": 2.6,
+      "dwell_s": 0.4,
+      "targets": [{"signal": "speed", "op": "le", "bound": 0.2, "scale": 1.2, "unit": "m/s"}],
+      "invariants": [
+        {"signal": "speed", "op": "le", "bound": 2.8, "scale": 1.2, "unit": "m/s"},
+        {"signal": "tilt", "op": "le", "bound": 0.61, "scale": 0.61, "unit": "rad"},
+        {"signal": "post_event_travel", "op": "le", "bound": 4.5, "scale": 4.5, "unit": "m"}
+      ],
+      "budget_reason": "Illustrative 4.5 m stopping corridor at 1.2 m/s cruise. 2.2 s response plus 0.4 s dwell, below 3.75 s at unchanged cruise; kinematic reference only, contact/actuator feasibility must be tested.",
+      "controller": {"cruise_v": 1.2, "speed_gain": 1.6, "yaw_gain": 0.35, "yaw_rate_gain": 0.12, "nav_max_age_s": 0.20, "innovation_pos_m": 1.2, "innovation_vel_mps": 2.5}
+    },
+    "multirotor": {
+      "policy": "HOLD",
+      "deadline_s": 3.0,
+      "dwell_s": 0.5,
+      "targets": [
+        {"signal": "speed", "op": "le", "bound": 0.3, "scale": 1.6, "unit": "m/s"},
+        {"signal": "vertical_speed", "op": "le", "bound": 0.25, "scale": 0.5, "unit": "m/s"},
+        {"signal": "altitude_error", "op": "le", "bound": 0.35, "scale": 0.35, "unit": "m"},
+        {"signal": "post_event_travel", "op": "le", "bound": 1.5, "scale": 1.5, "unit": "m"}
+      ],
+      "invariants": [
+        {"signal": "z", "op": "ge", "bound": 0.6, "scale": 2.0, "unit": "m"},
+        {"signal": "z", "op": "le", "bound": 3.4, "scale": 2.0, "unit": "m"},
+        {"signal": "tilt", "op": "le", "bound": 0.70, "scale": 0.70, "unit": "rad"},
+        {"signal": "post_event_travel", "op": "le", "bound": 6.0, "scale": 6.0, "unit": "m"}
+      ],
+      "budget_reason": "Illustrative 6 m safety containment radius at 1.6 m/s cruise, altitude 2 m. 2.5 s response plus 0.5 s dwell; horizontal speed <=0.3 m/s, vertical speed <=0.25 m/s, altitude error <=0.35 m and displacement from actual loss location <=1.5 m all required together. These values require mission-owner approval for any physical vehicle.",
+      "controller": {"cruise_v": 1.6, "position_gain": 0.7, "velocity_gain": 1.9, "altitude_gain": 3.5, "vertical_velocity_gain": 2.8, "attitude_gain": 1.8, "rate_gain": 0.34, "tilt_command_rad": 0.48, "nav_max_age_s": 0.20, "innovation_pos_m": 1.2, "innovation_vel_mps": 2.5}
+    }
+  },
+  "campaign": {
+    "heldout_count_per_model": 40,
+    "heldout_seed": 87001,
+    "search_budget_per_method": 12,
+    "search_seed": 1729,
+    "reduction_simulation_budget": 72,
+    "confirmation_seeds": [4101, 4102, 4103],
+    "nav_duration_s": [0.0, 2.4],
+    "authority": [0.45, 1.0],
+    "wind_mps": [0.0, 5.0],
+    "friction": [0.25, 0.95],
+    "latency_s": [0.04, 0.24],
+    "motor_lag_scale": [1.0, 2.5],
+    "bias_m": [-2.5, 2.5],
+    "nav_kinds": ["dropout", "stale", "bias"],
+    "fault_onset_s": 1.8,
+    "actuator_fault_end_s": 6.0,
+    "wind_onset_s": 2.0,
+    "wind_end_s": 6.0,
+    "distribution": "Independent uniform coordinates over these illustrative ranges; wind magnitude uniform and azimuth uniform on [0,2pi); nav kind and weakened actuator index categorical. IMU constant bias x in +/-0.06 m/s^2 and initial yaw in +/-0.08 rad. No claim about field frequencies. Held-out draws are generated only after freezing source and contract."
+  }
+}
