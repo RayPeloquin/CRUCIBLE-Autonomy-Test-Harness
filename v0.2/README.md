@@ -8,6 +8,8 @@ CRUCIBLE exercises a complete fault-evaluation workflow on two MuJoCo vehicle de
 
 Open [the offline evidence explorer](CRUCIBLE-v0.2-Explorer.html) locally after downloading; all data and scripts are embedded. No server or network connection is needed. This report and chart use recorded data, not generated imagery.
 
+**Source patch:** the current checkout includes a replay-integrity fix and 36 passing checks. The results below describe the original frozen release. See the [patch and archive compatibility note](../README.md#replay-integrity-patch).
+
 ## Recorded results
 
 40 held-out scenarios per model × 2 controllers = **160 runs**. Each pair uses the same scenario and exogenous noise seed. All 160 runs were conclusive/exercised and the quantitative monitor agreed with the separately implemented boolean oracle. These fractions describe only the declared synthetic distribution.

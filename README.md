@@ -17,6 +17,20 @@ Download the HTML and open it locally; GitHub displays its source rather than ru
 
 **Scope:** uncalibrated simulation demonstrators and manually authored controllers, including a deliberately defective legacy baseline. No production autopilot, hardware validity, automatic defect diagnosis/repair, flight readiness, or field reliability is established. The independent oracle and exact replay can share modeling/specification mistakes. See the [full methods and limitations](v0.2/README.md).
 
+## Replay integrity patch
+
+The checked-in `v0.2/` source now verifies both trace checksums and requires equal verdicts before reporting an EXACT replay. Previously, a copied checksum or a changed verdict could incorrectly pass. Two regression tests cover these cases; **36 checks pass** in the [patch validation record](v0.2/validation/replay-integrity.json).
+
+The downloadable ZIP, explorer and results above remain the original historical release, including its 34-check validation. They do not contain this patch. Modified source has a different source hash, so replaying the old frozen evidence with patched source reports INCOMPATIBLE. Use the original archive to reproduce its freeze, or generate a fresh campaign with patched source; the historical results have not been rerun or recertified.
+
+To validate the patched checkout without replacing the historical validation record:
+
+```bash
+cd v0.2
+python -m pip install -r requirements.txt
+python -m crucible validate --output validation-local.json
+```
+
 ## Run v0.2
 
 Extract `CRUCIBLE-v0.2.zip`, enter the extracted folder, and use Python 3.12:

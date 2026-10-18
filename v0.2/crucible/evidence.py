@@ -31,7 +31,12 @@ def compact(run):
 def compare(expected, actual, atol=1e-8, rtol=1e-8):
     if digest(expected["rows"]) != expected["trace_hash"]:
         return {"grade": "DIVERGENT", "reason": "Stored trace checksum is invalid"}
+    if digest(actual["rows"]) != actual["trace_hash"]:
+        return {"grade": "DIVERGENT", "reason": "Actual trace checksum is invalid"}
     if actual["trace_hash"] == expected["trace_hash"]:
+        if expected["verdict"] != actual["verdict"]:
+            return {"grade": "DIVERGENT", "reason": "Verdict differs despite identical trace",
+                    "max_absolute_difference": 0.0, "verdict_equal": False}
         return {"grade": "EXACT", "max_absolute_difference": 0.0}
     a, b = expected["rows"], actual["rows"]
     if len(a) != len(b):

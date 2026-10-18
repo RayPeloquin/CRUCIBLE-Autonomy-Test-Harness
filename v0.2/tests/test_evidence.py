@@ -41,6 +41,26 @@ class EvidenceChecks(unittest.TestCase):
         a["verdict"]["overall"] = "VIOLATED"
         self.assertEqual(compare(r, a)["grade"], "DIVERGENT")
 
+    def test_identical_trace_requires_matching_verdict_in_both_directions(self):
+        original = {"rows": [{"x": 0.0}], "verdict": {"overall": "SAT"}}
+        original["trace_hash"] = digest(original["rows"])
+        changed = copy.deepcopy(original)
+        changed["verdict"]["overall"] = "VIOLATED"
+        for expected, actual in ((original, changed), (changed, original)):
+            with self.subTest(expected=expected["verdict"]):
+                self.assertEqual(compare(expected, actual)["grade"], "DIVERGENT")
+
+    def test_actual_trace_checksum_must_match_rows(self):
+        original = {"rows": [{"x": 0.0}], "verdict": {"overall": "SAT"}}
+        original["trace_hash"] = digest(original["rows"])
+        for delta in (1e-10, 1.0):
+            for claimed_hash in (original["trace_hash"], "invalid"):
+                with self.subTest(delta=delta, claimed_hash=claimed_hash):
+                    changed = copy.deepcopy(original)
+                    changed["rows"][0]["x"] += delta
+                    changed["trace_hash"] = claimed_hash
+                    self.assertEqual(compare(original, changed)["grade"], "DIVERGENT")
+
     def test_tampering_and_incompatible_source_detected(self):
         r = simulate(Scenario("rover"), "guarded_failsafe", self.c)
         a = copy.deepcopy(r)
