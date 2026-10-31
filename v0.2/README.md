@@ -1,5 +1,7 @@
 # CRUCIBLE v0.2 — physics and evidence
 
+**Current checkpoint patch:** restore rejects a different physics timestep. The [current validation record](validation/checkpoint-timestep.json) records 37 passing checks, including the new mismatch regression and exact checkpoint round trips for both models. Historical release artifacts and campaign numbers below are unchanged.
+
 CRUCIBLE exercises a complete fault-evaluation workflow on two MuJoCo vehicle demonstrators: define a mission rule, run fault scenarios, search for violations, reduce a counterexample, compare manually authored controllers, save evidence, and replay it with negative controls.
 
 **This is executable simulation research, not validated autonomy, an automatic repair engine, or flight-ready software.** The quadrotor still fails many stress cases. v0.1 remains available in the parent repository and its original archive.

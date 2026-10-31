@@ -331,6 +331,8 @@ def restore(checkpoint, plant, ctrl, bus, contract):
         raise ValueError("Incompatible checkpoint contract")
     if checkpoint["source_hash"] != digest(source_manifest()) or checkpoint["environment"] != environment():
         raise ValueError("Incompatible checkpoint source/environment")
+    if checkpoint["physics_dt"] != float(plant.model.opt.timestep):
+        raise ValueError("Incompatible checkpoint physics timestep")
     mujoco.mj_setState(plant.model, plant.data, np.array(checkpoint["mujoco_integration_state"]), mujoco.mjtState.mjSTATE_INTEGRATION)
     plant.model.actuator_gainprm[:] = checkpoint["actuator_gainprm"]
     cs = checkpoint["controller_state"]

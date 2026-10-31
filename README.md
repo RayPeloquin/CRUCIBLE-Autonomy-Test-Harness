@@ -31,6 +31,10 @@ python -m pip install -r requirements.txt
 python -m crucible validate --output validation-local.json
 ```
 
+## Checkpoint timestep compatibility patch
+
+Checkpoint restore now rejects a physics timestep that differs from the saved checkpoint. Previously, the Python API silently resumed under a changed integration step despite the matching source, contract and environment. A regression test reproduces that mismatch; **37 checks pass** in the [current validation record](v0.2/validation/checkpoint-timestep.json), including exact checkpoint round trips for both models. This is simulation validation only. The historical archive, explorer and campaign results are unchanged and have not been recertified.
+
 ## Run v0.2
 
 Extract `CRUCIBLE-v0.2.zip`, enter the extracted folder, and use Python 3.12:

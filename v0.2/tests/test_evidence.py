@@ -25,6 +25,15 @@ class EvidenceChecks(unittest.TestCase):
             resumed = simulate(s, "guarded_failsafe", self.c, physics_dt=checkpoint["physics_dt"], resume_state=checkpoint)
             self.assertEqual(compare(uninterrupted, resumed)["grade"], "EXACT")
 
+    def test_checkpoint_rejects_changed_physics_timestep(self):
+        s = Scenario("rover")
+        run = simulate(s, "guarded_failsafe", self.c, checkpoint_at=10)
+        checkpoint = json.loads(json.dumps(run["checkpoint"]))
+        with self.assertRaisesRegex(ValueError, "timestep"):
+            simulate(s, "guarded_failsafe", self.c,
+                     physics_dt=checkpoint["physics_dt"] / 2,
+                     resume_state=checkpoint)
+
     def test_exact_and_perturbation_detection(self):
         s = Scenario("multirotor")
         r = simulate(s, "guarded_failsafe", self.c)
