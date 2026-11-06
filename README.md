@@ -8,20 +8,31 @@
 
 Download the HTML and open it locally; GitHub displays its source rather than running it. The archive contains all 160 held-out traces and the source/environment freeze. `v0.2/` provides directly inspectable source and summary records; extract the archive for complete saved-file replay inputs.
 
+## Validation by snapshot
+
+| v0.2 source or artifact | Checks passed | What the count covers |
+| --- | ---: | --- |
+| **Current source** in `v0.2/` | **37** | Both the replay-integrity and checkpoint-timestep patches. [Current validation log](v0.2/validation/checkpoint-timestep.json) |
+| Earlier replay-integrity patch | 36 | Added two checks for trace checksums and matching verdicts. [Replay patch log](v0.2/validation/replay-integrity.json) |
+| Historical v0.2 ZIP | 34 | Original source and its saved test run. [Release validation log](v0.2/VALIDATION.json) |
+| Offline HTML explorer | 34 | Displays the ZIP’s saved results, including the original validation count and the 160 held-out runs. |
+
+## Original v0.2 campaign results
+
 | Held-out contract violations | Legacy controller | Guarded controller |
 | --- | ---: | ---: |
 | Rover | 8/40 | 0/40 |
 | Quadrotor | 31/40 | 27/40 |
 
-34 checks passed; all 160 held-out evaluations agreed with the independent Boolean oracle. Six saved-file/checkpoint replay checks matched exactly, and four deliberate state/source changes were detected. Quadrotor pairs include five improvements **and one regression**. The guarded quadrotor still fails 27 cases. Zero rover violations in 40 cases does not establish zero risk; its 95% Wilson upper bound is 8.8% under the declared synthetic distribution.
+All 160 held-out evaluations agreed with the independent Boolean oracle. Six saved-file/checkpoint replay checks matched exactly, and four deliberate state/source changes were detected. Quadrotor pairs include five improvements **and one regression**. The guarded quadrotor still fails 27 cases. Zero rover violations in 40 cases does not establish zero risk; its 95% Wilson upper bound is 8.8% under the declared synthetic distribution.
 
 **Scope:** uncalibrated simulation demonstrators and manually authored controllers, including a deliberately defective legacy baseline. No production autopilot, hardware validity, automatic defect diagnosis/repair, flight readiness, or field reliability is established. The independent oracle and exact replay can share modeling/specification mistakes. See the [full methods and limitations](v0.2/README.md).
 
 ## Replay integrity patch
 
-The checked-in `v0.2/` source now verifies both trace checksums and requires equal verdicts before reporting an EXACT replay. Previously, a copied checksum or a changed verdict could incorrectly pass. Two regression tests cover these cases; **36 checks pass** in the [patch validation record](v0.2/validation/replay-integrity.json).
+The replay-integrity patch added verification of both trace checksums and required equal verdicts before reporting an EXACT replay. Previously, a copied checksum or a changed verdict could incorrectly pass. The two new regression tests brought that revision to [36 passing checks](v0.2/validation/replay-integrity.json).
 
-The downloadable ZIP, explorer and results above remain the original historical release, including its 34-check validation. They do not contain this patch. Modified source has a different source hash, so replaying the old frozen evidence with patched source reports INCOMPATIBLE. Use the original archive to reproduce its freeze, or generate a fresh campaign with patched source; the historical results have not been rerun or recertified.
+The ZIP contains the source and traces for the 160 held-out runs shown in the explorer. Replaying those traces with patched source reports INCOMPATIBLE because the source hash differs. Use the original ZIP to reproduce that campaign or generate a fresh campaign with the patched source.
 
 To validate the patched checkout without replacing the historical validation record:
 
@@ -43,7 +54,7 @@ Extract `CRUCIBLE-v0.2.zip`, enter the extracted folder, and use Python 3.12:
 python3.12 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
-python -m crucible validate
+python -m crucible validate --output validation-local.json
 python -m crucible replay results/rover/reduced.json.gz
 python -m crucible campaign --output results-new
 ```

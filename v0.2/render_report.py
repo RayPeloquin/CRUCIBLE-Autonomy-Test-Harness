@@ -197,6 +197,8 @@ def make_readme(s):
         rows.append(f"| {m} | {x['legacy_nav_gated']['counts']['VIOLATED']}/40 | {x['guarded_failsafe']['counts']['VIOLATED']}/40 | {x['guarded_failsafe']['wilson_95'][0]:.1%}–{x['guarded_failsafe']['wilson_95'][1]:.1%} |")
     text = '''# CRUCIBLE v0.2 — physics and evidence
 
+**The current source passed 37 checks.** It includes the earlier 36-check replay-integrity patch and now rejects a changed physics timestep on checkpoint restore. Exact checkpoint round trips passed for both models. [Current validation log](validation/checkpoint-timestep.json) · [Validation by snapshot](../README.md#validation-by-snapshot)
+
 CRUCIBLE exercises a complete fault-evaluation workflow on two MuJoCo vehicle demonstrators: define a mission rule, run fault scenarios, search for violations, reduce a counterexample, compare manually authored controllers, save evidence, and replay it with negative controls.
 
 **This is executable simulation research, not validated autonomy, an automatic repair engine, or flight-ready software.** The quadrotor still fails many stress cases. v0.1 remains available in the parent repository and its original archive.
@@ -204,6 +206,8 @@ CRUCIBLE exercises a complete fault-evaluation workflow on two MuJoCo vehicle de
 ![Measured v0.2 results](CRUCIBLE-v0.2.png)
 
 Open [the offline evidence explorer](CRUCIBLE-v0.2-Explorer.html) locally after downloading; all data and scripts are embedded. No server or network connection is needed. This report and chart use recorded data, not generated imagery.
+
+The explorer and the campaign results below describe the original release. Use the historical ZIP to replay those saved traces. [Replay compatibility](../README.md#replay-integrity-patch)
 
 ## Recorded results
 
@@ -215,7 +219,7 @@ __ROWS__
 
 The rover has 8 improved pairs and no regressed pairs. The quadrotor has 5 improved pairs, 1 regressed pair, 26 pairs violating both and 8 pairs passing both. These small paired results do not establish statistical superiority. Zero rover failures does not establish zero risk: its interval extends to 8.8% under this distribution.
 
-**34 checks passed**, including a 162-case expected-outcome recovery boundary sweep. Checks include independent Boolean/quantitative monitor comparisons, empty/missing/nonfinite telemetry, preserved known safety breaches, analytic free fall, hover force balance, actual wheel contact, force limits, seeded link-processing behavior, checkpoint persistence, corruption detection and accounting for failed search attempts.
+**The original release passed 34 checks**, including a 162-case expected-outcome recovery boundary sweep. Checks include independent Boolean/quantitative monitor comparisons, empty/missing/nonfinite telemetry, preserved known safety breaches, analytic free fall, hover force balance, actual wheel contact, force limits, seeded link-processing behavior, checkpoint persistence, corruption detection and accounting for failed search attempts.
 
 6/6 replay checks were exact (two saved evidence files plus one serialized full-state checkpoint per model). All 4 negative controls were detected: state perturbation caused divergence and source mismatch was incompatible on each model. Hashes are not signatures; repeatability and agreement do not prove correctness or physical validity.
 
@@ -227,7 +231,7 @@ Recorded environment: Python 3.12.14, MuJoCo 3.16.0, NumPy 2.5.4 on Linux x86_64
 python3.12 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
-python -m crucible validate
+python -m crucible validate --output validation-local.json
 python -m crucible replay results/rover/reduced.json.gz
 python -m crucible replay results/multirotor/reduced.json.gz
 python -m crucible resume results/rover/checkpoint.json.gz --output resumed.json.gz
@@ -282,7 +286,7 @@ Held-out sampling uses a separate PRNG, seeds 87001 (rover) and 97001 (quadrotor
 
 ## Replay and evidence layout
 
-`results/{rover,multirotor}/` contains compressed JSON evidence for nominal, original/reduced search cases, guard-on-reduced, isolated-outage development comparisons, no-trigger/short traces and every held-out run; plus search/reduction/ablation/replay/timestep ledgers and held-out indexes. `VALIDATION.json` stores the full check log. `SHA256SUMS.json` covers packaged files.
+`results/{rover,multirotor}/` contains compressed JSON evidence for nominal, original/reduced search cases, guard-on-reduced, isolated-outage development comparisons, no-trigger/short traces and every held-out run; plus search/reduction/ablation/replay/timestep ledgers and held-out indexes. `VALIDATION.json` stores the original release’s 34-check log. `SHA256SUMS.json` covers packaged files.
 
 Replay grades are EXACT, TOLERANT (declared 1e-8 absolute/relative tolerance with equal verdict data), DIVERGENT or INCOMPATIBLE. Exact hashes cover canonical complete sample rows. Checkpoint JSON stores MuJoCo's full integration state including warmstart, current model actuator gains, controller/estimator state, delayed messages, source timestamps, RNG state and evidence prefix. It uses no pickle. A stored environment/source/contract mismatch blocks an exact replay claim. Replay is version/architecture dependent; portability is not asserted.
 
